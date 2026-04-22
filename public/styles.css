@@ -1,0 +1,331 @@
+:root {
+  --accent: #D4522A;
+  --accent-1: #FBDDD1;
+  --accent-2: #F5AA8E;
+  --accent-3: #ED7750;
+  --accent-4: #E05330;
+  --accent-5: #D4522A;
+  --neutral: #EBEBEB;
+  --text: #1A1A1A;
+  --text-muted: #666;
+  --bg: #FAFAFA;
+  --panel-bg: #FFFFFF;
+  --border: #E0E0E0;
+  --cell-size: 13px;
+  --cell-gap: 3px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.period-toggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.period-toggle button {
+  padding: 6px 16px;
+  border: none;
+  background: var(--panel-bg);
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+}
+
+.period-toggle button:last-child {
+  border-right: none;
+}
+
+.period-toggle button.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.period-toggle button:hover:not(.active) {
+  background: #F5F5F5;
+}
+
+/* Navigation bar */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.nav-bar button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--panel-bg);
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.nav-bar button:hover {
+  background: #F5F5F5;
+}
+
+.nav-bar .period-label {
+  font-size: 16px;
+  font-weight: 500;
+  min-width: 160px;
+}
+
+/* Heatmap panels */
+.panels {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 0;
+}
+
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  width: fit-content;
+}
+
+.panel-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+/* Calendar grid (month/week view) */
+.calendar-wrap {
+  overflow-x: auto;
+}
+
+.day-labels {
+  display: grid;
+  grid-template-columns: repeat(7, var(--cell-size));
+  gap: var(--cell-gap);
+  margin-bottom: 4px;
+}
+
+.day-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-align: center;
+  width: var(--cell-size);
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, var(--cell-size));
+  gap: var(--cell-gap);
+}
+
+.week-grid {
+  display: flex;
+  gap: var(--cell-gap);
+}
+
+/* Year heatmap (GitHub style) */
+.year-grid-wrap {
+  overflow-x: auto;
+}
+
+.year-month-labels {
+  display: flex;
+  gap: 0;
+  margin-bottom: 4px;
+}
+
+.year-month-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+
+.year-grid {
+  display: flex;
+  gap: var(--cell-gap);
+}
+
+.year-week-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cell-gap);
+}
+
+/* Individual day cell */
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border-radius: 2px;
+  cursor: default;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cell.future {
+  background: transparent;
+}
+
+.cell.empty {
+  background: transparent;
+}
+
+.cell.neutral {
+  background: var(--neutral);
+}
+
+/* Blog cell states */
+.cell.blog-written {
+  background: var(--accent);
+}
+
+.cell.blog-not-written {
+  background: var(--neutral);
+}
+
+/* Claude intensity levels */
+.cell.claude-0 { background: var(--neutral); }
+.cell.claude-1 { background: var(--accent-1); }
+.cell.claude-2 { background: var(--accent-2); }
+.cell.claude-3 { background: var(--accent-3); }
+.cell.claude-4 { background: var(--accent-4); }
+.cell.claude-5 { background: var(--accent-5); }
+
+/* Tooltip */
+.tooltip {
+  position: fixed;
+  background: #1A1A1A;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  pointer-events: none;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.tooltip .tooltip-date {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+#tooltip-projects {
+  margin-top: 6px;
+  border-top: 1px solid #333;
+  padding-top: 6px;
+}
+
+.tooltip-project {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  line-height: 1.7;
+}
+
+.tp-name {
+  color: #ccc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.tp-tokens {
+  color: #fff;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Aggregates */
+.aggregates {
+  margin-bottom: 28px;
+}
+
+.agg-grid {
+  display: flex;
+  gap: 48px;
+  align-items: baseline;
+}
+
+.agg-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.agg-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.agg-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.agg-value .fraction {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  color: var(--text-muted);
+  font-size: 13px;
+}

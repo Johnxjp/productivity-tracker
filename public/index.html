@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productivity Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Productivity Tracker</h1>
+      <div class="period-toggle">
+        <button id="btn-week">Week</button>
+        <button id="btn-month" class="active">Month</button>
+        <button id="btn-year">Year</button>
+      </div>
+    </header>
+
+    <div class="aggregates">
+      <div class="agg-grid" id="aggregates">
+        <div class="agg-item">
+          <span class="agg-label">Blog days written</span>
+          <span class="agg-value" id="agg-blog">—</span>
+        </div>
+        <div class="agg-item">
+          <span class="agg-label">Total Claude tokens</span>
+          <span class="agg-value" id="agg-tokens">—</span>
+        </div>
+        <div class="agg-item">
+          <span class="agg-label">Active Claude days</span>
+          <span class="agg-value" id="agg-active">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-bar">
+      <button id="btn-prev">&#8249;</button>
+      <span class="period-label" id="period-label"></span>
+      <button id="btn-next">&#8250;</button>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <div class="panel-title">Builder's Blog</div>
+        <div class="calendar-wrap" id="blog-calendar">
+          <div class="loading">Loading...</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Claude Code</div>
+        <div class="calendar-wrap" id="claude-calendar">
+          <div class="loading">Loading...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip">
+    <div class="tooltip-date" id="tooltip-date"></div>
+    <div id="tooltip-blog"></div>
+    <div id="tooltip-tokens"></div>
+    <div id="tooltip-projects"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
