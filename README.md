@@ -7,6 +7,8 @@ A local productivity dashboard that visualises two daily metrics as calendar hea
 
 Data is collected automatically — no manual entry. The server reads directly from Claude Code's local transcript files and scrapes the blog page.
 
+![image](/assets/ui_screenshot.png)
+
 ## Running
 
 ```bash
